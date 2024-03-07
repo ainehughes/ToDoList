@@ -1,0 +1,68 @@
+package com.ainehughes.todolist;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class ToDoList {
+    private static Map<String, String> tasks = new HashMap<>();
+
+    public static void addTask() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter task name:");
+        String taskName = scanner.nextLine();
+        System.out.println("Enter task description:");
+        String taskDescription = scanner.nextLine();
+        tasks.put(taskName, taskDescription);
+        System.out.println("Task added successfully!");
+    }
+
+    public static void removeTask() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter task name to remove:");
+        String taskName = scanner.nextLine();
+        if (tasks.containsKey(taskName)) {
+            tasks.remove(taskName);
+            System.out.println("Task removed successfully!");
+        } else {
+            System.out.println("Task not found!");
+        }
+    }
+
+    public static void viewTasks() {
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks found!");
+        } else {
+            System.out.println("Tasks:");
+            for (Map.Entry<String, String> entry : tasks.entrySet()) {
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("\n1. Add Task\n2. Remove Task\n3. View Tasks\n4. Exit");
+            System.out.println("Enter your choice:");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    addTask();
+                    break;
+                case 2:
+                    removeTask();
+                    break;
+                case 3:
+                    viewTasks();
+                    break;
+                case 4:
+                    System.out.println("Exiting ToDo List App. Goodbye!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+        }
+    }
+}
